@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/cart-context";
 import { Logo } from "@/components/layout/Logo";
-import { socialLinks } from "@/components/layout/SocialIcons";
+
 
 const navLinks = [
   { href: "/", labelEn: "Home", labelAr: "الرئيسية" },
@@ -48,19 +48,6 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             </Link>
           ))}
         </nav>
-
-        <div className="items-center gap-1 hidden md:flex">
-          {socialLinks.map((s) => {
-            const Icon = s.icon;
-            return (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                <Button variant="ghost" size="icon" className="h-8 w-8">
-                  <Icon className="h-4 w-4" />
-                </Button>
-              </a>
-            );
-          })}
-        </div>
 
         <div className="flex items-center gap-1">
           <Button
@@ -125,18 +112,6 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
                   {locale === "ar" ? link.labelAr : link.labelEn}
                 </Link>
               ))}
-              <div className="flex gap-3 pt-4">
-                {socialLinks.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                      <Button variant="outline" size="icon">
-                        <Icon className="h-4 w-4" />
-                      </Button>
-                    </a>
-                  );
-                })}
-              </div>
             </nav>
           </motion.div>
         )}

@@ -2,7 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { generatePageMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShoppingBag, Leaf, Truck, Award,ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ShoppingBag, Truck, Award,ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { connectDB } from "@/lib/db";
 import { Product } from "@/models/Product";
@@ -61,9 +62,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </Link>
             </div>
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-primary/5">
-              <div className="absolute inset-0 flex items-center justify-center text-primary/20">
-                <Leaf className="h-24 w-24" />
-              </div>
+              <Image
+                src="/images/about-farm.svg"
+                alt="WARA Fresh dairy farm"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
@@ -105,7 +109,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </section>
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary to-primary-light text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
             {t("promotionTitle")}

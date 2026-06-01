@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#f8faf5"/>
+  <polygon points="120,280 280,280 250,140 150,140" fill="#2D5A27" opacity="0.12"/>
+  <polygon points="120,280 280,280 260,260 140,260" fill="#2D5A27" opacity="0.06"/>
+  <circle cx="180" cy="220" r="10" fill="#2D5A27" opacity="0.08"/>
+  <circle cx="230" cy="240" r="8" fill="#2D5A27" opacity="0.08"/>
+  <circle cx="200" cy="260" r="6" fill="#2D5A27" opacity="0.08"/>
+  <circle cx="260" cy="210" r="5" fill="#2D5A27" opacity="0.06"/>
+  <text x="200" y="355" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="700" fill="#2D5A27">Cheese</text>
+  <text x="200" y="378" text-anchor="middle" font-family="system-ui" font-size="11" fill="#2D5A27" opacity="0.5">WARA Fresh</text>
+</svg>

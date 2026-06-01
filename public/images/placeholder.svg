@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#f0f7ef"/>
+  <circle cx="200" cy="160" r="50" fill="#2D5A27" opacity="0.1"/>
+  <path d="M160 160 Q200 120 240 160" stroke="#2D5A27" stroke-width="2" fill="none" opacity="0.2"/>
+  <rect x="150" y="240" width="100" height="80" rx="8" fill="#2D5A27" opacity="0.08"/>
+  <rect x="165" y="255" width="70" height="20" rx="4" fill="#2D5A27" opacity="0.12"/>
+  <rect x="165" y="280" width="70" height="4" rx="2" fill="#2D5A27" opacity="0.08"/>
+  <rect x="165" y="290" width="70" height="4" rx="2" fill="#2D5A27" opacity="0.08"/>
+  <rect x="165" y="300" width="50" height="4" rx="2" fill="#2D5A27" opacity="0.08"/>
+  <text x="200" y="375" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="600" fill="#2D5A27">WARA Fresh</text>
+  <text x="200" y="395" text-anchor="middle" font-family="system-ui" font-size="10" fill="#2D5A27" opacity="0.4">Premium Dairy</text>
+</svg>

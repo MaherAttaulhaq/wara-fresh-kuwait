@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export function Logo({ className = "", showText = true }: { className?: string; showText?: boolean }) {
   return (
-    <Link href="/" className={`flex items-center gap-2 ${className}`}>
+    <Link href="/" className={`flex items-center gap-3 ${className}`}>
       <svg
-        width="36"
-        height="36"
+        width="44"
+        height="44"
         viewBox="0 0 36 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ export function Logo({ className = "", showText = true }: { className?: string; 
         />
       </svg>
       {showText && (
-        <span className="font-heading text-xl font-bold text-foreground">
+        <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
           WARA <span className="text-primary">Fresh</span>
         </span>
       )}

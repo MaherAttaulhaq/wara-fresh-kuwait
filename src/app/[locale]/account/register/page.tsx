@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { RegisterForm } from "@/components/shared/RegisterForm";
-import { Leaf } from "lucide-react";
+import { DairyIcon } from "@/components/layout/DairyIcon";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -31,7 +31,7 @@ export default async function RegisterPage({ params }: { params: Promise<{ local
           <Card className="border-border/50 shadow-lg shadow-primary/5">
             <div className="p-6 md:p-8 text-center border-b border-border/40">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
-                <Leaf className="h-7 w-7 text-primary" />
+                <DairyIcon className="h-7 w-7" />
               </div>
               <h1 className="font-heading text-2xl font-bold text-foreground">
                 {t("register")}

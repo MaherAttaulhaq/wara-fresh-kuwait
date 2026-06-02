@@ -37,7 +37,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
           </Avatar>
           <div className="flex-1">
             <h1 className="font-heading text-2xl font-bold text-foreground">{user?.name || "User"}</h1>
-            <p className="text-sm text-muted-foreground">{user.email}</p>
+            <p className="text-sm text-muted-foreground">{user?.email || ""}</p>
           </div>
           <form action={async () => {
             "use server";

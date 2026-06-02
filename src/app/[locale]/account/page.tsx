@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
+import { connectDB } from "@/lib/db";
+import { Order } from "@/models/Order";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -27,6 +29,13 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
 
   const user = session.user as any;
   const initials = user?.name?.charAt(0)?.toUpperCase() || "U";
+
+  let recentOrders: any[] = [];
+  if (user?.id) {
+    await connectDB();
+    const orders = await Order.find({ user: user.id }).sort({ createdAt: -1 }).limit(5).lean();
+    recentOrders = JSON.parse(JSON.stringify(orders));
+  }
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -78,51 +87,36 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
 
         <div className="mt-8 rounded-2xl bg-muted/50 p-8">
           <h2 className="font-heading text-lg font-semibold text-foreground mb-4">{t("orderHistory")}</h2>
-          <AccountOrdersView userId={user?.id} />
+          {recentOrders.length === 0 ? (
+            <div className="text-center py-8">
+              <ShoppingBag className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
+              <p className="text-sm text-muted-foreground">No orders yet.</p>
+              <Link href="/products">
+                <Button variant="link" className="mt-2">Start Shopping</Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {recentOrders.map((order) => (
+                <Link key={order._id} href={`/account/orders/${order._id}`}>
+                  <div className="flex items-center justify-between rounded-lg bg-background p-4 text-sm hover:border-primary/30 border transition-colors">
+                    <div>
+                      <p className="font-medium text-foreground">{order.orderNumber}</p>
+                      <p className="text-muted-foreground text-xs">
+                        {new Date(order.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-medium">{order.totalAmount.toFixed(3)} KWD</p>
+                      <p className="text-xs text-muted-foreground capitalize">{order.status.replace(/_/g, " ")}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  );
-}
-
-async function AccountOrdersView({ userId }: { userId?: string }) {
-  if (!userId) return null;
-  const { connectDB } = await import("@/lib/db");
-  const { Order } = await import("@/models/Order");
-  await connectDB();
-  const orders = await Order.find({ user: userId }).sort({ createdAt: -1 }).limit(5).lean();
-  const o = JSON.parse(JSON.stringify(orders));
-
-  if (o.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <ShoppingBag className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
-        <p className="text-sm text-muted-foreground">No orders yet.</p>
-        <Link href="/products">
-          <Button variant="link" className="mt-2">Start Shopping</Button>
-        </Link>
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-3">
-      {o.map((order: any) => (
-        <Link key={order._id} href={`/account/orders/${order._id}`}>
-          <div className="flex items-center justify-between rounded-lg bg-background p-4 text-sm hover:border-primary/30 border transition-colors">
-            <div>
-              <p className="font-medium text-foreground">{order.orderNumber}</p>
-              <p className="text-muted-foreground text-xs">
-                {new Date(order.createdAt).toLocaleDateString()}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="font-medium">{order.totalAmount.toFixed(3)} KWD</p>
-              <p className="text-xs text-muted-foreground capitalize">{order.status.replace(/_/g, " ")}</p>
-            </div>
-          </div>
-        </Link>
-      ))}
     </div>
   );
 }

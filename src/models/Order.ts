@@ -80,7 +80,6 @@ OrderSchema.pre("save", async function () {
 
 OrderSchema.index({ status: 1 });
 OrderSchema.index({ user: 1 });
-OrderSchema.index({ orderNumber: 1 });
 
 export const Order =
   (mongoose.models.Order as mongoose.Model<IOrder>) ||

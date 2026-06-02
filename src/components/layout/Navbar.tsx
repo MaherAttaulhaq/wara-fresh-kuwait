@@ -1,15 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingCart, User, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingCart, User, Sun, Moon, LogOut, Package, LayoutDashboard } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/cart-context";
 import { Logo } from "@/components/layout/Logo";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 
 const navLinks = [
@@ -22,11 +23,25 @@ const navLinks = [
   { href: "/contact", labelEn: "Contact", labelAr: "اتصل بنا" },
 ];
 
-export function Navbar({ locale = "en" }: { locale?: string }) {
+export function Navbar({ locale = "en", user }: { locale?: string; user?: { name?: string | null; email?: string | null; id?: string } | null }) {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const { totalItems } = useCart();
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const initials = user?.name?.charAt(0)?.toUpperCase() || "U";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -70,11 +85,70 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             </Button>
           </Link>
 
-          <Link href="/account">
-            <Button variant="ghost" size="icon">
-              <User className="h-7 w-7" />
-            </Button>
-          </Link>
+          <div className="relative" ref={dropdownRef}>
+            {user ? (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="text-xs bg-primary text-primary-foreground">{initials}</AvatarFallback>
+                  </Avatar>
+                </Button>
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      className="absolute right-0 mt-2 w-52 rounded-xl border bg-background p-1.5 shadow-lg z-50"
+                    >
+                      <div className="px-3 py-2 border-b border-border mb-1">
+                        <p className="text-sm font-medium text-foreground truncate">{user.name || "User"}</p>
+                        <p className="text-xs text-muted-foreground truncate">{user.email || ""}</p>
+                      </div>
+                      <Link
+                        href="/account"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors"
+                      >
+                        <LayoutDashboard className="h-4 w-4" /> Dashboard
+                      </Link>
+                      <Link
+                        href="/account/orders"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors"
+                      >
+                        <Package className="h-4 w-4" /> Orders
+                      </Link>
+                      <Link
+                        href="/account/profile"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors"
+                      >
+                        <User className="h-4 w-4" /> Profile
+                      </Link>
+                      <Link
+                        href="/api/auth/signout"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors border-t border-border mt-1 pt-2"
+                      >
+                        <LogOut className="h-4 w-4" /> Logout
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </>
+            ) : (
+              <Link href="/account/login">
+                <Button variant="ghost" size="icon">
+                  <User className="h-7 w-7" />
+                </Button>
+              </Link>
+            )}
+          </div>
 
           <Button
             variant="ghost"

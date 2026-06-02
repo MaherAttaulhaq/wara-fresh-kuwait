@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { auth } from "@/lib/auth";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/contexts/cart-context";
@@ -24,12 +25,16 @@ export default async function LocaleLayout({
   }
 
   const messages = await getMessages();
+  const session = await auth();
+  const user = session?.user
+    ? { name: session.user.name, email: session.user.email, id: (session.user as any).id }
+    : null;
 
   return (
     <NextIntlClientProvider messages={messages}>
       <CartProvider>
         <div dir={locale === "ar" ? "rtl" : "ltr"}>
-          <Navbar locale={locale} />
+          <Navbar locale={locale} user={user} />
           <main className="flex-1">{children}</main>
           <Footer locale={locale} />
         </div>

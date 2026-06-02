@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { connectDB } from "./db";
 import { User } from "@/models/User";
@@ -28,10 +27,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           role: user.role,
         };
       },
-    }),
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
   callbacks: {

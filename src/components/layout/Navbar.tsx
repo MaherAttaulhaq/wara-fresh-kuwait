@@ -55,15 +55,15 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            <Sun className="h-5 w-5 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-5 w-5 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
+            <Sun className="h-6 w-6 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-6 w-6 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
           </Button>
 
           <Link href="/cart">
             <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-6 w-6" />
               {totalItems > 0 && (
-                <Badge className="absolute -right-1 -top-1 h-4 w-4 p-0 flex items-center justify-center text-[10px]">
+                <Badge className="absolute -right-1.5 -top-1.5 h-5 w-5 p-0 flex items-center justify-center text-[11px]">
                   {totalItems}
                 </Badge>
               )}
@@ -72,7 +72,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
 
           <Link href="/account">
             <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
+              <User className="h-6 w-6" />
             </Button>
           </Link>
 
@@ -82,7 +82,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             className="md:hidden"
             onClick={() => setOpen(true)}
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-6 w-6" />
           </Button>
         </div>
       </div>
@@ -98,7 +98,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             <div className="flex h-16 items-center justify-between px-4 border-b">
               <Logo />
               <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               </Button>
             </div>
             <nav className="flex flex-col p-4 gap-4">

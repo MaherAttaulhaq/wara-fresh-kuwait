@@ -45,7 +45,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         role: token.role,
         id: token.sub,
       };
-      (session.user as Record<string, unknown>) = safeUser;
+      Object.assign(session.user, safeUser);
       return session;
     },
   },

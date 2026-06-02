@@ -1,17 +1,22 @@
 import mongoose from "mongoose";
 
+export interface INutrition {
+  servingSize: string;
+  energy: string;
+  fat: string;
+  protein: string;
+  carbohydrate: string;
+  vitaminA?: string;
+  vitaminD3?: string;
+  calcium?: string;
+}
+
 export interface IProduct {
   name: string;
   slug: string;
   category: "milk" | "laban" | "yogurt" | "cheese" | "juice";
   description?: string;
-  nutrition?: {
-    energy: string;
-    fat: string;
-    protein: string;
-    carbohydrate: string;
-    servingSize: string;
-  };
+  nutrition?: INutrition;
   price: number;
   image?: string;
   images: string[];
@@ -32,11 +37,14 @@ const ProductSchema = new mongoose.Schema<IProduct>(
     },
     description: { type: String },
     nutrition: {
+      servingSize: String,
       energy: String,
       fat: String,
       protein: String,
       carbohydrate: String,
-      servingSize: String,
+      vitaminA: String,
+      vitaminD3: String,
+      calcium: String,
     },
     price: { type: Number, required: true, min: 0 },
     image: { type: String },
@@ -49,7 +57,6 @@ const ProductSchema = new mongoose.Schema<IProduct>(
 
 ProductSchema.index({ category: 1 });
 ProductSchema.index({ featured: 1 });
-ProductSchema.index({ slug: 1 });
 
 export const Product =
   (mongoose.models.Product as mongoose.Model<IProduct>) ||

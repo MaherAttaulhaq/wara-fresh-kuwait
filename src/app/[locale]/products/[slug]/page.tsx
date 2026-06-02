@@ -8,6 +8,7 @@ import { Product } from "@/models/Product";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 import { ArrowLeft, ShoppingCart, Check } from "lucide-react";
 import { ProductDetailActions } from "@/components/products/ProductDetailActions";
 
@@ -48,8 +49,14 @@ export default async function ProductDetailPage({
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="aspect-square rounded-2xl bg-muted flex items-center justify-center">
-          <div className="text-muted-foreground/30 text-lg">{p.name}</div>
+        <div className="aspect-square rounded-2xl bg-muted flex items-center justify-center overflow-hidden">
+          <Image
+            src={`/images/products/${p.category}.svg`}
+            alt={p.name}
+            width={400}
+            height={400}
+            className="object-contain w-full h-full p-8"
+          />
         </div>
 
         <div>
@@ -85,13 +92,18 @@ export default async function ProductDetailPage({
                 <h3 className="font-heading font-semibold text-foreground mb-4">
                   {t("nutrition")}
                 </h3>
-                <p className="text-xs text-muted-foreground mb-3">{t("perServing")}</p>
+                <p className="text-xs text-muted-foreground mb-3">
+                  {t("perServing")} ({p.nutrition.servingSize})
+                </p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
                     { label: t("energy"), value: p.nutrition.energy },
                     { label: t("fat"), value: p.nutrition.fat },
                     { label: t("protein"), value: p.nutrition.protein },
                     { label: t("carbohydrate"), value: p.nutrition.carbohydrate },
+                    ...(p.nutrition.vitaminA ? [{ label: "Vitamin A", value: p.nutrition.vitaminA }] : []),
+                    ...(p.nutrition.vitaminD3 ? [{ label: "Vitamin D₃", value: p.nutrition.vitaminD3 }] : []),
+                    ...(p.nutrition.calcium ? [{ label: "Calcium", value: p.nutrition.calcium }] : []),
                   ].map((n) => (
                     <div
                       key={n.label}

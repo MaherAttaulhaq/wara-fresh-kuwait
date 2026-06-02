@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import { ShoppingCart, Eye } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { toast } from "sonner";
@@ -66,7 +67,13 @@ export function ProductsClient({ products }: { products: ProductItem[] }) {
           >
             <Card className="group overflow-hidden h-full flex flex-col">
               <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center">
-                <div className="text-muted-foreground/30 text-xs p-4 text-center">{p.name}</div>
+                <Image
+                  src={`/images/products/${p.category}.svg`}
+                  alt={p.name}
+                  width={400}
+                  height={400}
+                  className="object-contain w-full h-full p-6"
+                />
                 {!p.inStock && (
                   <Badge variant="secondary" className="absolute top-2 left-2">
                     {t("outOfStock")}

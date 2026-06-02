@@ -1,18 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
-  <rect width="800" height="600" fill="#f0f7ef"/>
-  <rect x="250" y="320" width="300" height="200" rx="8" fill="#2D5A27" opacity="0.12"/>
-  <polygon points="250,320 400,240 550,320" fill="#2D5A27" opacity="0.15"/>
-  <rect x="280" y="340" width="30" height="50" rx="3" fill="#2D5A27" opacity="0.08"/>
-  <rect x="370" y="340" width="60" height="80" rx="4" fill="#2D5A27" opacity="0.1"/>
-  <rect x="470" y="340" width="50" height="60" rx="3" fill="#2D5A27" opacity="0.08"/>
-  <rect x="375" y="360" width="20" height="25" rx="2" fill="#2D5A27" opacity="0.06"/>
-  <rect x="405" y="360" width="20" height="25" rx="2" fill="#2D5A27" opacity="0.06"/>
-  <circle cx="400" cy="430" r="40" fill="#2D5A27" opacity="0.06"/>
-  <path d="M300 520 Q350 510 400 520 Q450 530 500 520" stroke="#2D5A27" stroke-width="2" fill="none" opacity="0.15"/>
-  <circle cx="180" cy="380" r="12" fill="#2D5A27" opacity="0.1"/>
-  <circle cx="620" cy="400" r="10" fill="#2D5A27" opacity="0.08"/>
-  <circle cx="150" cy="420" r="8" fill="#2D5A27" opacity="0.07"/>
-  <circle cx="650" cy="370" r="6" fill="#2D5A27" opacity="0.06"/>
-  <text x="400" y="150" text-anchor="middle" font-family="system-ui" font-size="32" font-weight="700" fill="#2D5A27">Our Farm</text>
-  <text x="400" y="185" text-anchor="middle" font-family="system-ui" font-size="16" fill="#2D5A27" opacity="0.6">Kuwaiti Dairy Since 1976</text>
+  <defs>
+    <linearGradient id="farmBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f5e0"/>
+      <stop offset="100%" stop-color="#d4e8c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#farmBg)"/>
+  <path d="M0 400 Q200 350 400 380 Q600 410 800 370 L800 600 L0 600 Z" fill="#2D5A27" fill-opacity="0.12"/>
+  <rect x="250" y="300" width="300" height="220" rx="6" fill="#2D5A27" fill-opacity="0.08"/>
+  <polygon points="250,300 400,200 550,300" fill="#2D5A27" fill-opacity="0.12"/>
+  <rect x="260" y="310" width="40" height="60" rx="2" fill="#2D5A27" fill-opacity="0.06"/>
+  <rect x="260" y="310" width="40" height="15" fill="#2D5A27" fill-opacity="0.1"/>
+  <rect x="380" y="330" width="40" height="70" rx="2" fill="#2D5A27" fill-opacity="0.06"/>
+  <rect x="380" y="330" width="40" height="15" fill="#2D5A27" fill-opacity="0.1"/>
+  <rect x="500" y="320" width="40" height="50" rx="2" fill="#2D5A27" fill-opacity="0.06"/>
+  <rect x="500" y="320" width="40" height="15" fill="#2D5A27" fill-opacity="0.1"/>
+  <path d="M300 520 Q400 540 500 520" stroke="#2D5A27" stroke-opacity="0.15" stroke-width="2" fill="none"/>
+  <circle cx="160" cy="400" r="15" fill="#2D5A27" fill-opacity="0.1"/>
+  <circle cx="640" cy="380" r="12" fill="#2D5A27" fill-opacity="0.08"/>
+  <circle cx="100" cy="450" r="10" fill="#2D5A27" fill-opacity="0.06"/>
+  <circle cx="700" cy="420" r="8" fill="#2D5A27" fill-opacity="0.06"/>
+  <rect x="100" y="460" width="20" height="40" rx="3" fill="#2D5A27" fill-opacity="0.08"/>
+  <rect x="680" y="440" width="20" height="50" rx="3" fill="#2D5A27" fill-opacity="0.08"/>
+  <text x="400" y="130" text-anchor="middle" font-family="system-ui" font-size="34" font-weight="700" fill="#2D5A27">Our Farm</text>
+  <text x="400" y="165" text-anchor="middle" font-family="system-ui" font-size="15" fill="#2D5A27" fill-opacity="0.55">Kuwaiti Dairy Since 1976</text>
 </svg>

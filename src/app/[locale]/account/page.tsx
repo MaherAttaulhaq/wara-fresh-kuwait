@@ -78,7 +78,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
 
         <div className="mt-8 rounded-2xl bg-muted/50 p-8">
           <h2 className="font-heading text-lg font-semibold text-foreground mb-4">{t("orderHistory")}</h2>
-          <AccountOrdersView userId={user.id} />
+          <AccountOrdersView userId={user?.id} />
         </div>
       </div>
     </div>

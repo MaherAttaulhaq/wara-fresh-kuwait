@@ -3,7 +3,7 @@ import { generatePageMeta } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, Truck, Award,ArrowRight } from "lucide-react";
+import { ShoppingBag, Leaf, Truck, Award,ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { connectDB } from "@/lib/db";
 import { Product } from "@/models/Product";

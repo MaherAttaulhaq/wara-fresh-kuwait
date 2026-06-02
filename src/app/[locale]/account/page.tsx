@@ -26,7 +26,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
   if (!session) redirect("/account/login");
 
   const user = session.user as any;
-  const initials = user.name?.charAt(0).toUpperCase() || "U";
+  const initials = user?.name?.charAt(0)?.toUpperCase() || "U";
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -36,7 +36,7 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <h1 className="font-heading text-2xl font-bold text-foreground">{user.name}</h1>
+            <h1 className="font-heading text-2xl font-bold text-foreground">{user?.name || "User"}</h1>
             <p className="text-sm text-muted-foreground">{user.email}</p>
           </div>
           <form action={async () => {

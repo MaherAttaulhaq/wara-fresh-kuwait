@@ -30,7 +30,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
         <Logo />
 
         <nav className="hidden md:flex items-center gap-6">
@@ -49,21 +49,21 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            <Sun className="h-6 w-6 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-6 w-6 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
+            <Sun className="h-7 w-7 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-7 w-7 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
           </Button>
 
           <Link href="/cart">
             <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-6 w-6" />
+              <ShoppingCart className="h-7 w-7" />
               {totalItems > 0 && (
-                <Badge className="absolute -right-1.5 -top-1.5 h-5 w-5 p-0 flex items-center justify-center text-[11px]">
+                <Badge className="absolute -right-2 -top-2 h-5 w-5 p-0 flex items-center justify-center text-[11px]">
                   {totalItems}
                 </Badge>
               )}
@@ -72,7 +72,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
 
           <Link href="/account">
             <Button variant="ghost" size="icon">
-              <User className="h-6 w-6" />
+              <User className="h-7 w-7" />
             </Button>
           </Link>
 
@@ -82,7 +82,7 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             className="md:hidden"
             onClick={() => setOpen(true)}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-7 w-7" />
           </Button>
         </div>
       </div>
@@ -95,10 +95,10 @@ export function Navbar({ locale = "en" }: { locale?: string }) {
             exit={{ opacity: 0, x: "100%" }}
             className="fixed inset-0 z-50 bg-background md:hidden"
           >
-            <div className="flex h-16 items-center justify-between px-4 border-b">
+            <div className="flex h-20 items-center justify-between px-4 border-b">
               <Logo />
               <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-                <X className="h-6 w-6" />
+                <X className="h-7 w-7" />
               </Button>
             </div>
             <nav className="flex flex-col p-4 gap-4">

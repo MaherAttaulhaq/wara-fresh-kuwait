@@ -56,6 +56,7 @@ export default async function ProductDetailPage({
             width={400}
             height={400}
             className="object-contain w-full h-full p-8"
+            unoptimized
           />
         </div>
 

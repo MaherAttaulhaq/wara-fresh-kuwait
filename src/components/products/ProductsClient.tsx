@@ -73,6 +73,7 @@ export function ProductsClient({ products }: { products: ProductItem[] }) {
                   width={400}
                   height={400}
                   className="object-contain w-full h-full p-6"
+                  unoptimized
                 />
                 {!p.inStock && (
                   <Badge variant="secondary" className="absolute top-2 left-2">

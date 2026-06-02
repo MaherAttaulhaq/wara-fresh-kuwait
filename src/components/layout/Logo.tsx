@@ -4,8 +4,8 @@ export function Logo({ className = "", showText = true }: { className?: string; 
   return (
     <Link href="/" className={`flex items-center gap-3 ${className}`}>
       <svg
-        width="44"
-        height="44"
+        width="48"
+        height="48"
         viewBox="0 0 36 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ export function Logo({ className = "", showText = true }: { className?: string; 
         />
       </svg>
       {showText && (
-        <span className="font-heading text-2xl font-bold tracking-tight text-foreground">
+        <span className="font-heading text-3xl font-bold tracking-tight text-foreground">
           WARA <span className="text-primary">Fresh</span>
         </span>
       )}

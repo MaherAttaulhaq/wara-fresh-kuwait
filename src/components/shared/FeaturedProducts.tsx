@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { ShoppingCart, Eye } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { toast } from "sonner";
@@ -38,10 +39,15 @@ export function FeaturedProducts({ products }: { products: ProductItem[] }) {
           transition={{ duration: 0.5, delay: i * 0.1 }}
         >
           <Card className="group overflow-hidden">
-            <div className="aspect-square bg-muted relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/30 text-xs p-4 text-center">
-                {p.name}
-              </div>
+            <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center">
+              <Image
+                src={`/images/products/${p.category}.svg`}
+                alt={p.name}
+                width={400}
+                height={400}
+                className="object-contain w-full h-full p-6"
+                unoptimized
+              />
             </div>
             <CardContent className="pt-4">
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">

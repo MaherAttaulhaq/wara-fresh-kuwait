@@ -85,7 +85,8 @@ export default async function AccountPage({ params }: { params: Promise<{ locale
   );
 }
 
-async function AccountOrdersView({ userId }: { userId: string }) {
+async function AccountOrdersView({ userId }: { userId?: string }) {
+  if (!userId) return null;
   const { connectDB } = await import("@/lib/db");
   const { Order } = await import("@/models/Order");
   await connectDB();

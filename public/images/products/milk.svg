@@ -22,7 +22,7 @@
   <text x="200" y="200" text-anchor="middle" font-family="system-ui" font-size="24" font-weight="800" fill="#2D5A27">MILK</text>
   <text x="200" y="225" text-anchor="middle" font-family="system-ui" font-size="10" fill="#2D5A27" fill-opacity="0.6">FRESH FROM THE FARM</text>
   <line x1="165" y1="240" x2="235" y2="240" stroke="#2D5A27" stroke-opacity="0.1" stroke-width="1"/>
-  <text x="200" y="260" text-anchor="middle" font-family="system-ui" font-size="9" fill="#2D5A27" fill-opacity="0.4">ت <tspan dx="5">Fresh & Pure</tspan></text>
+  <text x="200" y="260" text-anchor="middle" font-family="system-ui" font-size="9" fill="#2D5A27" fill-opacity="0.4">ت <tspan dx="5">Fresh &amp; Pure</tspan></text>
   <rect x="170" y="275" width="60" height="2" rx="1" fill="#2D5A27" fill-opacity="0.08"/>
   <text x="200" y="375" text-anchor="middle" font-family="system-ui" font-size="12" fill="#2D5A27" fill-opacity="0.35">WARA Fresh — Al Safat Dairy Co.</text>
 </svg>

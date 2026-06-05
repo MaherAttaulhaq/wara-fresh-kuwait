@@ -19,6 +19,13 @@ interface ProductItem {
   category: string;
 }
 
+const springCard = (i: number) => ({
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { type: "spring" as const, stiffness: 80, damping: 18, mass: 0.9, delay: i * 0.1 },
+});
+
 export function FeaturedProducts({ products }: { products: ProductItem[] }) {
   const t = useTranslations("products");
   const { addItem } = useCart();
@@ -31,21 +38,16 @@ export function FeaturedProducts({ products }: { products: ProductItem[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {products.map((p, i) => (
-        <motion.div
-          key={p._id}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: i * 0.1 }}
-        >
+        <motion.div key={p._id} {...springCard(i)}>
           <Card className="group overflow-hidden">
-            <div className="aspect-square bg-muted relative overflow-hidden flex items-center justify-center">
+            <div className="aspect-square bg-gradient-to-br from-muted to-muted/50 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <Image
                 src={`/images/products/${p.category}.svg`}
                 alt={p.name}
                 width={400}
                 height={400}
-                className="object-contain w-full h-full p-6"
+                className="object-contain w-full h-full p-6 transition-transform duration-500 group-hover:scale-110"
                 unoptimized
               />
             </div>

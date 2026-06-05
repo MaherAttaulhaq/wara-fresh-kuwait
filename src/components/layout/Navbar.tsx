@@ -23,6 +23,19 @@ const navLinks = [
   { href: "/contact", labelEn: "Contact", labelAr: "اتصل بنا" },
 ];
 
+const springDropdown = {
+  initial: { opacity: 0, y: -12, scale: 0.95 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  exit: { opacity: 0, y: -12, scale: 0.95 },
+  transition: { type: "spring" as const, stiffness: 200, damping: 20, mass: 0.7 },
+};
+
+const springNavItem = {
+  whileHover: { scale: 1.05 },
+  whileTap: { scale: 0.97 },
+  transition: { type: "spring" as const, stiffness: 300, damping: 15 },
+};
+
 export function Navbar({ locale = "en", user }: { locale?: string; user?: { name?: string | null; email?: string | null; id?: string } | null }) {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -50,59 +63,70 @@ export function Navbar({ locale = "en", user }: { locale?: string; user?: { name
 
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-            >
-              {locale === "ar" ? link.labelAr : link.labelEn}
-            </Link>
+            <motion.div key={link.href} {...springNavItem}>
+              <Link
+                href={link.href}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  pathname === link.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {locale === "ar" ? link.labelAr : link.labelEn}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          >
-            <Sun className="h-7 w-7 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-7 w-7 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
-          </Button>
-
-          <Link href="/cart">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-7 w-7" />
-              {totalItems > 0 && (
-                <Badge className="absolute -right-2 -top-2 h-5 w-5 p-0 flex items-center justify-center text-[11px]">
-                  {totalItems}
-                </Badge>
-              )}
+          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              <Sun className="h-7 w-7 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-7 w-7 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
             </Button>
-          </Link>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+            <Link href="/cart">
+              <Button variant="ghost" size="icon" className="relative">
+                <ShoppingCart className="h-7 w-7" />
+                {totalItems > 0 && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  >
+                    <Badge className="absolute -right-2 -top-2 h-5 w-5 p-0 flex items-center justify-center text-[11px]">
+                      {totalItems}
+                    </Badge>
+                  </motion.div>
+                )}
+              </Button>
+            </Link>
+          </motion.div>
 
           <div className="relative" ref={dropdownRef}>
             {user ? (
               <>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="text-xs bg-primary text-primary-foreground">{initials}</AvatarFallback>
-                  </Avatar>
-                </Button>
+                <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    <Avatar className="h-8 w-8">
+                      <AvatarFallback className="text-xs bg-primary text-primary-foreground">{initials}</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </motion.div>
                 <AnimatePresence>
                   {dropdownOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
+                      {...springDropdown}
                       className="absolute right-0 mt-2 w-52 rounded-xl border bg-background p-1.5 shadow-lg z-50"
                     >
                       <div className="px-3 py-2 border-b border-border mb-1">
@@ -142,22 +166,26 @@ export function Navbar({ locale = "en", user }: { locale?: string; user?: { name
                 </AnimatePresence>
               </>
             ) : (
-              <Link href="/account/login">
-                <Button variant="ghost" size="icon">
-                  <User className="h-7 w-7" />
-                </Button>
-              </Link>
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                <Link href="/account/login">
+                  <Button variant="ghost" size="icon">
+                    <User className="h-7 w-7" />
+                  </Button>
+                </Link>
+              </motion.div>
             )}
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setOpen(true)}
-          >
-            <Menu className="h-7 w-7" />
-          </Button>
+          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setOpen(true)}
+            >
+              <Menu className="h-7 w-7" />
+            </Button>
+          </motion.div>
         </div>
       </div>
 
@@ -167,13 +195,16 @@ export function Navbar({ locale = "en", user }: { locale?: string; user?: { name
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
             className="fixed inset-0 z-50 bg-background md:hidden"
           >
             <div className="flex h-20 items-center justify-between px-4 border-b">
               <Logo />
-              <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-                <X className="h-7 w-7" />
-              </Button>
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+                  <X className="h-7 w-7" />
+                </Button>
+              </motion.div>
             </div>
             <nav className="flex flex-col p-4 gap-4">
               {navLinks.map((link) => (

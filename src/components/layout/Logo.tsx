@@ -1,15 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export function Logo({ className = "", showText = true }: { className?: string; showText?: boolean }) {
   return (
     <Link href="/" className={`flex items-center gap-3 ${className}`}>
-      <svg
+      <motion.svg
         width="48"
         height="48"
         viewBox="0 0 36 36"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="shrink-0"
+        whileHover={{ scale: 1.08, rotate: -3 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 300, damping: 12 }}
       >
         <circle cx="18" cy="18" r="17" className="fill-primary" />
         <path
@@ -27,7 +33,7 @@ export function Logo({ className = "", showText = true }: { className?: string; 
           strokeLinecap="round"
           className="stroke-primary-foreground/70"
         />
-      </svg>
+      </motion.svg>
       {showText && (
         <span className="font-heading text-3xl font-bold tracking-tight text-foreground">
           WARA <span className="text-primary">Fresh</span>

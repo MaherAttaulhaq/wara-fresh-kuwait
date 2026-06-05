@@ -48,8 +48,8 @@ export default async function ProductDetailPage({
         <ArrowLeft className="h-4 w-4" /> Back to Products
       </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="aspect-square rounded-2xl bg-muted flex items-center justify-center overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div className="aspect-square rounded-[2rem] bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center overflow-hidden sticky top-28">
           <Image
             src={`/images/products/${p.category}.svg`}
             alt={p.name}
@@ -60,24 +60,24 @@ export default async function ProductDetailPage({
           />
         </div>
 
-        <div>
-          <Badge variant="secondary" className="mb-3">
+        <div className="pt-4">
+          <Badge variant="secondary" className="mb-4">
             {t(`categories.${p.category}`)}
           </Badge>
-          <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-3 tracking-tight">
             {p.name}
           </h1>
-          <p className="text-3xl font-bold text-primary mb-6">{p.price.toFixed(3)} KWD</p>
+          <p className="text-4xl font-bold gradient-text mb-6">{p.price.toFixed(3)} <span className="text-lg font-medium text-muted-foreground">KWD</span></p>
 
           {p.description && (
-            <p className="text-muted-foreground mb-6 leading-relaxed">{p.description}</p>
+            <p className="text-muted-foreground mb-6 leading-relaxed text-base">{p.description}</p>
           )}
 
           <div className="flex items-center gap-2 mb-6">
             {p.inStock ? (
               <>
                 <Check className="h-4 w-4 text-green-600" />
-                <span className="text-sm text-green-600">{t("inStock")}</span>
+                <span className="text-sm text-green-600 font-medium">{t("inStock")}</span>
               </>
             ) : (
               <Badge variant="secondary">{t("outOfStock")}</Badge>
@@ -88,15 +88,17 @@ export default async function ProductDetailPage({
 
           {p.nutrition && (
             <>
-              <Separator className="my-8" />
+              <Separator className="my-10" />
               <div>
-                <h3 className="font-heading font-semibold text-foreground mb-4">
-                  {t("nutrition")}
-                </h3>
-                <p className="text-xs text-muted-foreground mb-3">
-                  {t("perServing")} ({p.nutrition.servingSize})
-                </p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="flex items-baseline justify-between mb-4">
+                  <h3 className="font-heading text-xl font-bold text-foreground tracking-tight">
+                    {t("nutrition")}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {t("perServing")} ({p.nutrition.servingSize})
+                  </p>
+                </div>
+                <div className="space-y-2">
                   {[
                     { label: t("energy"), value: p.nutrition.energy },
                     { label: t("fat"), value: p.nutrition.fat },
@@ -105,13 +107,13 @@ export default async function ProductDetailPage({
                     ...(p.nutrition.vitaminA ? [{ label: "Vitamin A", value: p.nutrition.vitaminA }] : []),
                     ...(p.nutrition.vitaminD3 ? [{ label: "Vitamin D₃", value: p.nutrition.vitaminD3 }] : []),
                     ...(p.nutrition.calcium ? [{ label: "Calcium", value: p.nutrition.calcium }] : []),
-                  ].map((n) => (
+                  ].map((n, i) => (
                     <div
                       key={n.label}
-                      className="flex justify-between rounded-lg bg-muted px-4 py-2 text-sm"
+                      className="flex justify-between items-center rounded-xl bg-muted/50 px-5 py-3 text-sm border border-border/30"
                     >
-                      <span className="text-muted-foreground">{n.label}</span>
-                      <span className="font-medium">{n.value}</span>
+                      <span className="text-muted-foreground font-medium">{n.label}</span>
+                      <span className="font-bold text-foreground tabular-nums">{n.value}</span>
                     </div>
                   ))}
                 </div>

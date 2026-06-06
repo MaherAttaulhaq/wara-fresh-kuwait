@@ -67,16 +67,19 @@ export default async function CareerDetailPage({
           )}
         </div>
 
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-6">
+        <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-6">
           {c.title}
         </h1>
 
-        <p className="text-muted-foreground leading-relaxed mb-8">{c.description}</p>
+        <p className="text-muted-foreground leading-relaxed text-base md:text-lg mb-8">{c.description}</p>
 
         {c.requirements?.length > 0 && (
           <>
             <Separator className="mb-8" />
-            <h2 className="font-heading text-xl font-semibold text-foreground mb-4">Requirements</h2>
+            <h2 className="font-heading text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+              <span className="h-1 w-6 rounded-full bg-primary" />
+              Requirements
+            </h2>
             <ul className="space-y-3 mb-8">
               {c.requirements.map((req: string, i: number) => (
                 <li key={i} className="flex items-start gap-2 text-muted-foreground">
@@ -90,16 +93,16 @@ export default async function CareerDetailPage({
 
         <Separator className="mb-8" />
 
-        <div className="rounded-2xl bg-muted/50 p-8">
+        <div className="rounded-[2rem] bg-gradient-to-br from-primary/5 via-primary/5 to-secondary/5 p-8 md:p-10 border border-primary/10">
           <h2 className="font-heading text-xl font-semibold text-foreground mb-4">{t("applyForm")}</h2>
           <p className="text-muted-foreground mb-6">
             To apply for this position, please send your CV and cover letter to{" "}
-            <a href="mailto:careers@safatdairy.com" className="text-primary underline">
+            <a href="mailto:careers@safatdairy.com" className="text-primary underline font-medium">
               careers@safatdairy.com
             </a>
           </p>
           <a href="mailto:careers@safatdairy.com">
-            <Button size="lg">{t("applyNow")}</Button>
+            <Button size="lg" className="rounded-full">{t("applyNow")}</Button>
           </a>
         </div>
       </div>

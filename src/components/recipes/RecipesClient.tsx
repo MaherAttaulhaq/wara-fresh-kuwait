@@ -20,6 +20,13 @@ interface RecipeItem {
   image?: string;
 }
 
+const springCard = (i: number) => ({
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { type: "spring" as const, stiffness: 80, damping: 18, mass: 0.9, delay: i * 0.08 },
+});
+
 export function RecipesClient({ recipes }: { recipes: RecipeItem[] }) {
   const t = useTranslations("recipes");
   const [active, setActive] = useState<string>("all");
@@ -36,10 +43,10 @@ export function RecipesClient({ recipes }: { recipes: RecipeItem[] }) {
               key={cat}
               onClick={() => setActive(cat)}
               className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-colors",
+                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
                 active === cat
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-muted-foreground hover:bg-muted/80"
+                  ? "bg-primary text-primary-foreground shadow-md"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80 hover:shadow-sm"
               )}
             >
               {cat === "all" ? "All" : cat}
@@ -50,18 +57,20 @@ export function RecipesClient({ recipes }: { recipes: RecipeItem[] }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((r, i) => (
-          <motion.div
-            key={r._id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
-          >
+          <motion.div key={r._id} {...springCard(i)}>
             <Card className="group overflow-hidden h-full flex flex-col">
-              <div className="aspect-video bg-muted relative overflow-hidden flex items-center justify-center">
-                <ChefHat className="h-12 w-12 text-muted-foreground/30" />
+              <div className="aspect-video bg-gradient-to-br from-muted to-muted/50 relative overflow-hidden flex items-center justify-center">
+                <ChefHat className="h-16 w-16 text-muted-foreground/20 transition-all duration-500 group-hover:scale-110 group-hover:text-primary/30" />
               </div>
               <CardContent className="flex-1 pt-4">
-                <h3 className="font-heading font-semibold text-foreground mb-2">{r.title}</h3>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {r.category && (
+                    <span className="text-xs font-medium text-primary bg-primary/10 px-2.5 py-0.5 rounded-full">
+                      {r.category}
+                    </span>
+                  )}
+                </div>
+                <h3 className="font-heading font-semibold text-foreground mb-2 text-lg">{r.title}</h3>
                 <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                   {r.prepTime && (
                     <span className="flex items-center gap-1">

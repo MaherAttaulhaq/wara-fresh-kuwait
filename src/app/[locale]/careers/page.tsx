@@ -30,8 +30,13 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="font-heading text-4xl font-bold text-foreground mb-4">{t("title")}</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">{t("subtitle")}</p>
+        <p className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+          Join Our Team
+        </p>
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4">
+          {t("title")}
+        </h1>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">{t("subtitle")}</p>
       </div>
       <CareersClient careers={serialized} />
     </div>

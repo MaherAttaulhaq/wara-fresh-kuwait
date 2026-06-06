@@ -46,8 +46,8 @@ export default async function RecipeDetailPage({
         <ArrowLeft className="h-4 w-4" /> Back to Recipes
       </Link>
 
-      <div className="aspect-video rounded-2xl bg-muted flex items-center justify-center mb-10">
-        <ChefHat className="h-20 w-20 text-muted-foreground/30" />
+      <div className="aspect-video rounded-[2rem] bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 flex items-center justify-center mb-10">
+        <ChefHat className="h-24 w-24 text-primary/20" />
       </div>
 
       <div className="max-w-3xl mx-auto">
@@ -70,12 +70,13 @@ export default async function RecipeDetailPage({
           )}
         </div>
 
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-8">
+        <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight mb-8">
           {r.title}
         </h1>
 
         <div className="mb-8">
-          <h2 className="font-heading text-xl font-semibold text-foreground mb-4">
+          <h2 className="font-heading text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span className="h-1 w-6 rounded-full bg-primary" />
             {t("ingredients")}
           </h2>
           <ul className="space-y-2">
@@ -91,7 +92,8 @@ export default async function RecipeDetailPage({
         <Separator className="my-8" />
 
         <div>
-          <h2 className="font-heading text-xl font-semibold text-foreground mb-4">
+          <h2 className="font-heading text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span className="h-1 w-6 rounded-full bg-primary" />
             {t("instructions")}
           </h2>
           <ol className="space-y-4">

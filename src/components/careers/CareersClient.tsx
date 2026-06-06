@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Briefcase, Clock, ArrowRight } from "lucide-react";
+import { MapPin, Briefcase, ArrowRight } from "lucide-react";
 
 interface CareerItem {
   _id: string;
@@ -17,6 +17,13 @@ interface CareerItem {
   location?: string;
   description: string;
 }
+
+const springCard = (i: number) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { type: "spring" as const, stiffness: 100, damping: 20, mass: 0.8, delay: i * 0.08 },
+});
 
 export function CareersClient({ careers }: { careers: CareerItem[] }) {
   const t = useTranslations("careers");
@@ -42,16 +49,11 @@ export function CareersClient({ careers }: { careers: CareerItem[] }) {
   return (
     <div className="max-w-4xl mx-auto space-y-4">
       {careers.map((c, i) => (
-        <motion.div
-          key={c._id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: i * 0.05 }}
-        >
-          <Card>
+        <motion.div key={c._id} {...springCard(i)}>
+          <Card className="group hover:shadow-lg transition-all duration-300">
             <CardContent className="pt-4">
               <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="space-y-2">
+                <div className="space-y-2 flex-1 min-w-0">
                   <h3 className="font-heading text-lg font-semibold text-foreground">{c.title}</h3>
                   <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
                     {c.department && (

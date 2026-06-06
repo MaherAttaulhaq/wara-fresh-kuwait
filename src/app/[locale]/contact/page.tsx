@@ -69,10 +69,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
             <DairyIcon className="h-7 w-7" />
           </div>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">
+            Get In Touch
+          </p>
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight mb-4">
             {t("title")}
           </h1>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-xl mx-auto text-base md:text-lg">
             {t("subtitle")}
           </p>
         </div>
@@ -86,7 +89,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 {info.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-4 rounded-xl border border-border/50 bg-card p-4 shadow-sm transition-shadow hover:shadow-md"
+                    className="flex items-start gap-4 rounded-xl border border-border/50 bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
                   >
                     <div
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${item.bg} ${item.color}`}
